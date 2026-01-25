@@ -29,7 +29,10 @@ const hoytsCinema = {
 
 const App = () => {
   return <div>
-    <CinemaSeatBooking {...hoytsCinema} />
+    <CinemaSeatBooking
+      {...hoytsCinema}
+      onBook={(selectedSeats) => console.log('Booking confirmed for seats:', selectedSeats)}
+    />
   </div>;
 };
 
