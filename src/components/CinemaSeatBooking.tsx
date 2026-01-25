@@ -82,8 +82,8 @@ const CinemaSeatBooking = ({
     <div className='flex flex-col items-center min-h-screen max-w-180 mx-auto p-4'>
       {/* Title and subtitle */}
       <div className='flex flex-col items-center mb-6'>
-        <h1 className='text-3xl font-extrabold'>{title}</h1>
-        <p className='text-gray-600 text-xs mt-1'>{subtitle}</p>
+        <h1 className='text-3xl font-extrabold text-green-600'>{title}</h1>
+        <p className='text-gray-600 text-xs mt-1 text-green-600'>{subtitle}</p>
       </div>
 
       {/* Screen */}
@@ -96,10 +96,16 @@ const CinemaSeatBooking = ({
       {/* Seat Layout */}
       <div className="flex flex-col gap-2">
         {seats.map((row, rowIndex) => (
-          <div key={rowIndex} className='flex justify-center gap-2'>
+          <div key={rowIndex} className='flex items-center justify-center gap-2'>
+            {/* Row Label */}
+            <div className="w-6 text-center font-bold text-gray-500 mr-2">
+              {String.fromCharCode(65 + rowIndex)}
+            </div>
             {row.map((seat) => {
               const isSelected = selectedSeats.includes(seat.id);
-              const classes = `w-8 h-8 flex items-center justify-center rounded transition-colors duration-200 text-xs font-medium text-white ${getColorClasses(seat.color, seat.isBooked, isSelected)
+              const isDivider = seat.column === layout.dividerPosition;
+              const classes = `w-8 h-8 flex items-center justify-center rounded transition-colors duration-200 text-[10px] text-white ${isDivider ? 'mr-8' : '' // Add gap for aisle
+                } ${getColorClasses(seat.color, seat.isBooked, isSelected)
                 }`;
 
               return (
@@ -109,7 +115,7 @@ const CinemaSeatBooking = ({
                   onClick={() => toggleSeat(seat.id)}
                   title={`${seat.id} - ${currency}${seat.price}`}
                 >
-                  {seat.column}
+                  {seat.id}
                 </div>
               );
             })}

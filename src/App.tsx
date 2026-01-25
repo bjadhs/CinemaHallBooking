@@ -7,8 +7,8 @@ const hoytsCinema = {
   bookedSeats: ['A1', 'A2', 'B3'],
   layout: {
     rows: 10,
-    columns: 8,
-    dividerPosition: 6,
+    columns: 7,
+    dividerPosition: 5,
   },
   seatTypes: [
     {
